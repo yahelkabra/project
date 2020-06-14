@@ -10,7 +10,7 @@ document.body.addEventListener("keydown", function(event)
   console.log("uniCharCode");
   var char = event.keyCode;
   KEYS.push(char);
-  if (KEYS[0] == 89 && char == 32)
+  if (char == 32)
   {
     update_oct_string();
     KEYS = [];
@@ -18,13 +18,31 @@ document.body.addEventListener("keydown", function(event)
   console.log("out uniCharCode");
 });
 
+function y_index(key)
+{
+  //checks if the key is y
+  return key ==89;
+}
+
+function is_y_in_array()
+{
+  // the function checks if there y was pressed
+  var index = KEYS.findIndex(y_index)
+  if (KEYS.findIndex(y_index) == null)
+  {
+    return false;
+  }
+  KEYS = KEYS.slice(index);
+  return true;
+}
+
 function read()
 {
   // the function reads the message that was written and returns an array that contains the words
   console.log("read");
   var sum = 0;
   var array = [];
-  for (var i = 0; i < KEYS.length; i++)
+  for (var i = KEYS.findIndex(y_index); i < KEYS.length; i++)
   {
     if (KEYS[i] == 13)
     {
@@ -47,8 +65,12 @@ function update_oct_string()
   // the function updates the global string oct_string.
   //This string contains the message in octal
   console.log("translate_to_frac");
-  var mess_array = read();
-  window.oct_string = turn_to_oct(mess_array);
+  if (is_y_in_array())
+  {
+    var mess_array = read();
+    window.oct_string = turn_to_oct(mess_array);
+  }
+
   console.log("out translate_to_frac");
 }
 
