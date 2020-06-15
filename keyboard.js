@@ -42,7 +42,7 @@ function read()
   console.log("read");
   var sum = 0;
   var array = [];
-  for (var i = KEYS.findIndex(y_index); i < KEYS.length; i++)
+  for (var i = 0; i < KEYS.length; i++)
   {
     if (KEYS[i] == 13)
     {
